@@ -128,7 +128,7 @@ def save(
         doc = Document()
         doc.add_paragraph(text)
 
-        output_file = output_dir / f"{file_name}_TRY_3.docx"
+        output_file = output_dir / f"{file_name}.docx"
         doc.save(str(output_file))
 
         algorithm.logger.info(f"Transcription saved in: {output_file}")

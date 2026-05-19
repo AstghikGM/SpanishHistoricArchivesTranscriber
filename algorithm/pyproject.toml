@@ -10,7 +10,9 @@ dependencies = [
     "ocean-runner>=0.2.31",
     "pytest>=8.3.4,<9",
     "requests==2.32.5",
-    "python-docx"
+    "python-docx",
+    "python-dotenv",
+    "Pillow"
 ]
 
 [tool.uv]

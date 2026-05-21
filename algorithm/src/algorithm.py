@@ -17,9 +17,7 @@ import time
 OPENWEBUI_API_KEY = os.getenv("OPENWEBUI_API_KEY")
 OPENWEBUI_URL = "https://chat.agrospai.udl.cat"
 CHAT_COMPLETIONS_URL = f"{OPENWEBUI_URL}/api/chat/completions"
-#MODEL_ID = "Qwen/Qwen3-VL-32B-Instruct"
-#MODEL_ID = "vllm.Qwen/Qwen3.5-27B"
-MODEL_ID = "qwen3-vl:32b"
+MODEL_ID = "vllm.Qwen/Qwen3.6-27B-FP8"
 
 VALID_EXTENSIONS = [".png", ".jpg", ".jpeg", ".tiff", ".bmp", ".gif"]
 MAX_RETRIES = 3
@@ -100,18 +98,6 @@ def run(algorithm: Algorithm) -> Results:
                   algorithm.logger.error(f"Failed to optimize {path.name}")
                   continue
             
-
-              prompt_qwen_vl = """
-Act as a professional paleographer. Transcribe literally this 20th-century historical Spanish document. 
-
-Rules:
-1. RAW LAYOUT: You must start a new line in your text every time a new line starts in the image. No exceptions.
-2. VERBATIM ONLY: Transcribe text exactly as written (keep the spelling, archaic grammar, punctuation).
-3. UNCERTAINTY: Use [?] for illegible words or [word?] if you are unsure of a word.
-4. MARGINALIA: Transcribe all headers, page numbers, and signatures in the margins/corners.
-5. FORMAT: Provide only the transcripted text. No additional explanations.
-"""
-
               system_prompt = "Handwritten text exact transcription."
               user_prompt = """
 ### ROLE: Professional Paleographer
@@ -170,7 +156,7 @@ Rules:
                                 "content": content
                         })
                         success = True
-                        break # Success, exit retry loop
+                        break # Exit retry loop
 
                     except requests.exceptions.HTTPError as e:
                         status_code = e.response.status_code

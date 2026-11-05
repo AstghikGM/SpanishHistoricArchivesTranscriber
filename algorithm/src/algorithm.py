@@ -25,7 +25,7 @@ MAX_IMAGE_PX = 2800
 # Inputs definition
 class InputParameters(BaseModel):
     model_id: str = Field(
-        default="Qwen/Qwen3.6-27b",
+        default="Qwen/Qwen3.8-27b",
         title="Vision AI Model ID",
         description="The vision AI model to be used for the transcription."
     )
